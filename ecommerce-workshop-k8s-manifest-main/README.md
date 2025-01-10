@@ -1,2 +1,5 @@
-# kubernetes manifest only
-## 행복하자 이기적~
+# Notes
+
+- This folder contains kustomize manifest files.
+
+---
