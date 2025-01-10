@@ -8,14 +8,19 @@
 
 ## 3. Tech Stack
 
-#8. Project Structure
+## 4. Project Structure
+### This repository consists of three folders:
 
-## 4. Implementation Details
+- 2MIR-FP-main: Contains Terragrunt code.
+- ecommerce-workshop-k8s-manifest-main: Holds the source code for the shopping mall application.
+- ecommerce-workshop-k8s-manifest-main: Includes Kustomize manifest information.
 
-## 5. Setup & Deployment
+## 5. Implementation Details
 
-## 6. Testing & Results
+## 6. Setup & Deployment
 
-## 7. Challenges & Improvements
+## 7. Testing & Results
 
-## 8. References
+## 8. Challenges & Improvements
+
+## 9. References
