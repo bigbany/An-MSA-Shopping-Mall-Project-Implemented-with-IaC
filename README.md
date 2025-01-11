@@ -19,6 +19,8 @@ This project focuses on building an EKS cluster using Infrastructure as Code (Ia
 - **Application Monitoring**  
   Implemented **Datadog** for detailed monitoring and performance insights of the application.
 
+---
+
 ## 2. Architecture Design
 [![architecture](https://github.com/user-attachments/assets/34796c22-80f6-4b0c-ac96-ae21defe5339)]()
 The overall structure is as described above.
@@ -34,6 +36,7 @@ When ArgoCD detects changes in the deployment repository, it deploys the new ima
 <img width="1000" alt="dev_iac" src="https://github.com/user-attachments/assets/b23f69f3-c1ab-4eeb-9bc9-eb631254ec4c" />
 When a user accesses the domain registered in Route53, the request is routed through the Internet Gateway (IGW) and the Application Load Balancer to the Pod.
 
+---
 
 ## 3. Tech Stack
 ### Tech Stack
@@ -51,6 +54,8 @@ When a user accesses the domain registered in Route53, the request is routed thr
 | **Container Registry**   | **Amazon ECR**        | <img src="https://img.shields.io/badge/Amazon%20ECR-FF9900?style=flat-square&logo=amazonecr&logoColor=white"/> | Secure container registry for storing Docker images.            |
 | **Database**             | **Amazon RDS**        | <img src="https://img.shields.io/badge/Amazon%20RDS-527FFF?style=flat-square&logo=amazonrds&logoColor=white"/> | Managed relational database service for scalable applications.  |
 
+---
+
 
 ## 4. Project Structure
 ### This repository consists of three folders:
@@ -59,8 +64,54 @@ When a user accesses the domain registered in Route53, the request is routed thr
 - ecommerce-workshop-k8s-manifest-main: Holds the source code for the shopping mall application.
 - ecommerce-workshop-k8s-manifest-main: Includes Kustomize manifest information.
 
-## 5. Implementation Details
+---
 
+## 5. Implementation Details
+### IaC
+
+Infrastructure as Code (IaC)** is a methodology for managing and provisioning infrastructure through code. This approach allows infrastructure to be implemented quickly and accurately, reducing manual effort and errors.
+
+One of the most common tools for IaC is **Terraform**, which enables the creation and management of infrastructure resources. However, when implementing the same infrastructure across multiple environments (e.g., dev, staging, production), Terraform can require repetitive configurations, which is time-consuming and error-prone.
+
+To minimize repetitive tasks and enhance scalability, **Terragrunt** was utilized.
+
+#### What is Terragrunt?
+
+**Terragrunt** is a thin wrapper for Terraform that provides additional functionality to manage infrastructure code efficiently. Its key benefits include:
+
+- **DRY (Don't Repeat Yourself) Principle**: Terragrunt reduces code duplication by allowing shared configurations across multiple environments.
+- **Environment Isolation**: It helps isolate infrastructure for different environments while maintaining reusable components.
+- **Automated Workflows**: Simplifies and automates Terraform operations like dependency management and module configuration.
+
+By leveraging Terragrunt, we achieved a scalable and maintainable infrastructure setup that minimizes repetitive work and improves operational efficiency.
+
+<img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/aeefe4a3-424e-4e2c-83d9-73338ebbe084" />
+#### Key Points
+
+##### Folder Structure:
+- **Origin Folder**: Contains common Terraform code (`.tf`) definitions.
+- **DEV, PROD**: Each environment is managed with its own `terragrunt.hcl` file.
+
+##### Terragrunt Configuration:
+- **Parent `terragrunt.hcl`**: Defines shared configurations.
+- **Child `terragrunt.hcl`**: Adds or overrides environment-specific configurations.
+- **`env.hcl`**: Contains environment-specific variables.
+
+##### Benefits:
+- **Code Reusability**: Minimizes repetitive tasks.
+- **Environment Scalability**: Enables reuse of configurations for adding new environments.
+- **AWS Resource Management**: Efficiently deploys resources like EKS, RDS, Route53, and subnets.
+
+In conclusion, Terragrunt simplifies the management and scalability of complex infrastructure.
+
+### EKS
+
+
+### CI/CD
+
+### Monitoring
+
+<img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/ba726749-bc02-4745-8af9-034b3a47e9af"/>
 ## 6. Setup & Deployment
 
 ## 7. Testing & Results
