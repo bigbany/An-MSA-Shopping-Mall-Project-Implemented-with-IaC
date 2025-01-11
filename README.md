@@ -25,7 +25,7 @@ This project focuses on building an EKS cluster using Infrastructure as Code (Ia
 [![architecture](https://github.com/user-attachments/assets/34796c22-80f6-4b0c-ac96-ae21defe5339)]()
 The overall structure is as described above.
 
-<img width="1000" alt="dev_iac" src="https://private-user-images.githubusercontent.com/63151655/402228885-70aed109-1b6b-4e4d-9fa9-fb3b000405b4.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzY1ODAwODMsIm5iZiI6MTczNjU3OTc4MywicGF0aCI6Ii82MzE1MTY1NS80MDIyMjg4ODUtNzBhZWQxMDktMWI2Yi00ZTRkLTlmYTktZmIzYjAwMDQwNWI0LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMTElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTExVDA3MTYyM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWNhMmU1M2IxNThhZWVkZDU5NGU1MDIzNzc2NDgyN2FhNWRlMTBmOGQyYzc0NDgyY2JjOWRhZTAyNzIzYWYwMzAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.46a1oSLA7x9o0MXNMum94vQdu4c6nmxUmSHNIKhwBiA" />
+<img width="1000" alt="dev_iac" src="https://github.com/user-attachments/assets/5a6c364f-c953-4694-ac7a-258c31ceed9c" />
 Developers run Terragrunt code on a bastion server.
 <img width="1000" alt="dev_iac" src="https://github.com/user-attachments/assets/dac8e746-9b9f-4fee-9454-bffe78a6aeec" />
 
