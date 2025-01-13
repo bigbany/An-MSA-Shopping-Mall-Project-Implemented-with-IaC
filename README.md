@@ -247,17 +247,19 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
    The GitHub Action updates the image tag in the Kustomize manifest files located in the deployment repository to reflect the latest image tag.
 
 <img alt="separation of two repo" width="1000" src="https://github.com/user-attachments/assets/0c4959c6-253f-4e49-baa7-f7d8bf7a4468" />
+
 4. **ArgoCD Deployment**:  
    ArgoCD detects changes in the deployment repository and automatically deploys the updated image to the EKS cluster.
+   
+<img alt="slack_msg" width="800" src="https://github.com/user-attachments/assets/3e1ff6f4-0a05-4195-bf26-9bda638a80a0"/>
 
-<img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/ba726749-bc02-4745-8af9-034b3a47e9af"/>
-5. **Slack Notification**:  
+6. **Slack Notification**:  
    After the deployment is completed, ArgoCD shares the deployment results (e.g., success or failure) in a Slack channel, ensuring visibility for the team.
 
 
 ---
 
-
+<img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/ba726749-bc02-4745-8af9-034b3a47e9af"/>
 
 
 ### Monitoring
