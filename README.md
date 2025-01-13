@@ -256,12 +256,7 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
    
 
 5. **Slack Notification**:
-
-<p align="center">
-  <img alt="separation of two repo" width="500" src="https://github.com/user-attachments/assets/c8d1f7e3-03ef-4a76-a198-b4991dbeef47" />
-  <img alt="separation of two repo" width="500" src="https://github.com/user-attachments/assets/0c4959c6-253f-4e49-baa7-f7d8bf7a4468" />
-</p>
-
+<img alt="slack_msg" width="800" src="https://private-user-images.githubusercontent.com/63151655/402471554-3e1ff6f4-0a05-4195-bf26-9bda638a80a0.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzY3NTcyNTIsIm5iZiI6MTczNjc1Njk1MiwicGF0aCI6Ii82MzE1MTY1NS80MDI0NzE1NTQtM2UxZmY2ZjQtMGEwNS00MTk1LWJmMjYtOWJkYTYzOGE4MGEwLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTEzVDA4MjkxMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWJjY2VlNTY4YjQ3YzE2ZTM4Mjc0ZmY4NTJkZjMzNGNkNTUwMjg1ZWViN2FjMWNiM2Y5MDQzNDg3ZTQxOGZlNjQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.5ExFCuRhMVQH__-eiGS7OImiDMOhSHox-vfzX59hkbM"/>
 
 - After the deployment is completed, ArgoCD shares the deployment results (e.g., success or failure) in a Slack channel, ensuring visibility for the team.
 
