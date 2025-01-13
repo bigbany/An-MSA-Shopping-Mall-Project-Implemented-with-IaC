@@ -23,6 +23,7 @@ This project focuses on building an EKS cluster using Infrastructure as Code (Ia
 
 ## 2. Architecture Design
 [![architecture](https://github.com/user-attachments/assets/34796c22-80f6-4b0c-ac96-ae21defe5339)]()
+
 The overall structure is as described above.
 
 <img width="1000" alt="dev_iac" src="https://github.com/user-attachments/assets/5a6c364f-c953-4694-ac7a-258c31ceed9c" />
@@ -69,7 +70,7 @@ When a user accesses the domain registered in Route53, the request is routed thr
 ## 5. Implementation Details
 ### IaC
 
-Infrastructure as Code (IaC)** is a methodology for managing and provisioning infrastructure through code. This approach allows infrastructure to be implemented quickly and accurately, reducing manual effort and errors.
+Infrastructure as Code (IaC) is a methodology for managing and provisioning infrastructure through code. This approach allows infrastructure to be implemented quickly and accurately, reducing manual effort and errors.
 
 One of the most common tools for IaC is **Terraform**, which enables the creation and management of infrastructure resources. However, when implementing the same infrastructure across multiple environments (e.g., dev, staging, production), Terraform can require repetitive configurations, which is time-consuming and error-prone.
 
@@ -187,7 +188,6 @@ This workflow ensures seamless integration of Kubernetes with AWS Application Lo
   - **Tight Integration with GitHub**: Built directly into GitHub, it simplifies tasks that involve multiple repositories or actions across different projects.
   - **Cloud-Native Flexibility**: No need to manage servers, allowing focus on pipeline logic rather than infrastructure.
 
----
 
 ##### Key Takeaway: Why GitHub Actions?
 GitHub Actions was chosen because it simplifies workflows, particularly for:
@@ -196,13 +196,76 @@ GitHub Actions was chosen because it simplifies workflows, particularly for:
 
 While Jenkins offers flexibility and maturity, **GitHub Actions stood out for its ease of use and efficiency in handling specific needs like cross-repository updates.**
 
+
 ---
+
+#### **ArgoCD**
+
+<img alt="JENKINS_GITHUBACTION" width="1000" src="https://velog.velcdn.com/images/baeyuna97/post/4c54fd96-dac9-4475-8097-cfcb00fc742b/image.png" />
+
+- **Kubernetes-Specific CD Tool**: Designed specifically for managing Continuous Deployment in Kubernetes environments.
+- **Intuitive Web UI**: Provides an easy-to-use and visually straightforward interface for managing deployments.
+- **History-Based Rollback**: Allows rollbacks to previous states using deployment history, ensuring reliability and ease of recovery.
+
+#### **Blue-Green Deployment**
+<img alt="blue_green" width="1000" src="https://github.com/user-attachments/assets/3cc755cd-7fd0-4d90-8167-11e02dfee33c" />
+
+- **Zero Downtime Deployment**: Ensures uninterrupted service during deployment.
+- **Reusability of Previous Environments**: The previous environment (blue) can be reused for rollback or other purposes.
+- **No Version Compatibility Issues**: The new version (green) and the old version are completely isolated, eliminating compatibility concerns.
+
+##### Advantages Over Other Deployment Strategies:
+1. **Safety**: Blue-green deployment allows the previous version (blue) to remain untouched, making rollback quick and straightforward in case of issues with the new version (green).
+2. **Testing in Production-Like Environment**: The new version can be thoroughly tested in the green environment before traffic is switched, ensuring confidence in the release.
+3. **Eliminates Downtime**: Unlike rolling or canary deployments, all user traffic is shifted at once, providing a seamless transition.
+4. **Simplicity in Traffic Management**: Using a load balancer to direct traffic makes the process simpler and more efficient compared to other strategies.
+5. **Easy Rollback**: If any issues are detected after the switch, traffic can quickly revert to the blue environment.
+
+Blue-green deployment is particularly beneficial for systems where uninterrupted service and risk minimization are critical.
+
+#### Separation of Source Code and Deployment Repositories Using Kustomize
+
+<img alt="separation of two repo" width="1000" src="https://github.com/user-attachments/assets/cd6e5660-51be-4578-9c1b-a2b93c6da6b7" />
+
+##### Repository Structure
+- **Source Code Repository**: Contains only the application source code.
+- **Deployment Repository**: Contains only Kustomize manifest files for application deployment.
+
+##### Workflow
+
+<img alt="separation of two repo" width="1000" src="https://github.com/user-attachments/assets/c8d1f7e3-03ef-4a76-a198-b4991dbeef47" />
+
+1. **Source Code Changes**:  
+   When changes occur in the source code repository, a GitHub Action is triggered.
+
+2. **Image Build and Push**:  
+   The GitHub Action:
+   - Builds a new Docker image using the updated source code.
+   - Pushes the new image to Amazon ECR.
+
+3. **Image Tag Update**:  
+   The GitHub Action updates the image tag in the Kustomize manifest files located in the deployment repository to reflect the latest image tag.
+
+<img alt="separation of two repo" width="1000" src="https://github.com/user-attachments/assets/0c4959c6-253f-4e49-baa7-f7d8bf7a4468" />
+4. **ArgoCD Deployment**:  
+   ArgoCD detects changes in the deployment repository and automatically deploys the updated image to the EKS cluster.
+
+<img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/ba726749-bc02-4745-8af9-034b3a47e9af"/>
+5. **Slack Notification**:  
+   After the deployment is completed, ArgoCD shares the deployment results (e.g., success or failure) in a Slack channel, ensuring visibility for the team.
+
+
+---
+
+
+
 
 ### Monitoring
 
 ---
 
-<img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/ba726749-bc02-4745-8af9-034b3a47e9af"/>
+
+
 ## 6. Setup & Deployment
 
 ## 7. Testing & Results
