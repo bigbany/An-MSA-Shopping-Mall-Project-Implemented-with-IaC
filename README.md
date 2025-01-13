@@ -329,20 +329,6 @@ These components work together to provide a comprehensive monitoring and alertin
   - Kubelet for node-level metrics.
   - Container applications for application-level data.
 
-##### **Application Monitoring with Datadog**
-Datadog enables comprehensive **application performance monitoring (APM)**, providing visibility into every request, service, and database query.
-
-##### **Reasons for Choosing Datadog**
-1. **End-to-End Visibility**:
-   - Tracks application performance across all services, including databases, APIs, and background jobs.
-2. **Real-Time Error Tracking**:
-   - Quickly identifies and isolates issues like errors in database queries or slow endpoints.
-3. **Detailed Trace Analysis**:
-   - Visualizes the flow of requests and identifies bottlenecks through tools like flame graphs.
-4. **Seamless Integration**:
-   - Supports a wide range of integrations with frameworks and cloud services, making it easy to monitor diverse environments.
-5. **Proactive Alerting**:
-   - Sends notifications for performance degradations or errors to ensure timely response.
 
 
 ## 6. Setup & Deployment
