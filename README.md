@@ -108,7 +108,62 @@ In conclusion, Terragrunt simplifies the management and scalability of complex i
 ### EKS
 #### Comparison of EKS and K8s
 
-<img alt="comparison_eks_k8s" width="1000" src="https://private-user-images.githubusercontent.com/63151655/402411284-aa83ec9e-5db5-4a32-8f35-4a7d02a8e545.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzY3Mzc1NjcsIm5iZiI6MTczNjczNzI2NywicGF0aCI6Ii82MzE1MTY1NS80MDI0MTEyODQtYWE4M2VjOWUtNWRiNS00YTMyLThmMzUtNGE3ZDAyYThlNTQ1LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTEzVDAzMDEwN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQ3ZWI2ZThhMDFjNjM5ZDNmOTJhYmI4NmE5NzU4MzA1NGQ0YTMwMzg1NjAwNzc1OTYxZmY3ODFmN2FmNzQyYjkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.W39D7_zB4HDrTVL3K6IHKx0cuurPqhHZDdob8dFeg9o"/ >
+<img alt="comparison_eks_k8s" width="1000" src="https://private-user-images.githubusercontent.com/63151655/402411284-aa83ec9e-5db5-4a32-8f35-4a7d02a8e545.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzY3Mzc1NjcsIm5iZiI6MTczNjczNzI2NywicGF0aCI6Ii82MzE1MTY1NS80MDI0MTEyODQtYWE4M2VjOWUtNWRiNS00YTMyLThmMzUtNGE3ZDAyYThlNTQ1LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTEzVDAzMDEwN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQ3ZWI2ZThhMDFjNjM5ZDNmOTJhYmI4NmE5NzU4MzA1NGQ0YTMwMzg1NjAwNzc1OTYxZmY3ODFmN2FmNzQyYjkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.W39D7_zB4HDrTVL3K6IHKx0cuurPqhHZDdob8dFeg9o" />
+
+##### K8s (Kubernetes)
+- **Management**: Requires direct management.
+- **Complexity**: Involves complex procedures.
+- **High Availability (HA)**: Does not provide built-in HA functionality.
+
+##### EKS (Amazon Elastic Kubernetes Service)
+- **Management**: Managed by AWS.
+- **Ease of Use**: Operations can be performed through the AWS Management Console.
+- **High Availability**: Provides a managed EKS control plane with built-in HA.
+
+#### AWS LoadBalancer Controller
+<img alt="comparison_eks_k8s" width="1000" src="https://github.com/user-attachments/assets/72b5903e-a5cf-412e-8a80-5502af556fc6" />
+
+##### 1. Ingress Resource Handling
+- Detects when an **Ingress resource** is defined in the Kubernetes cluster.
+- Creates traffic routing configurations based on the Ingress rules.
+
+##### 2. ALB Creation and Management
+- Automatically creates an **Application Load Balancer (ALB)** based on the Ingress resource definition.
+- Routes client (user) traffic through the ALB to the appropriate Kubernetes services and Pods.
+
+##### 3. Traffic Routing
+- The ALB forwards traffic to the correct services according to the Ingress rules.
+- Kubernetes services then route the traffic to the corresponding Pods.
+
+##### 4. Automation
+- Automates tasks such as ALB creation, applying Ingress rules, and configuring security groups.
+- Reduces the need for manual intervention, simplifying management.
+
+##### Example Workflow
+1. A user creates an **Ingress resource** in the Kubernetes cluster.
+2. The AWS LoadBalancer Controller detects the Ingress and creates an **ALB** with the necessary configurations.
+3. The ALB routes incoming requests based on the Ingress rules to the corresponding Kubernetes services.
+4. The services forward the traffic to the appropriate Pods.
+
+This workflow ensures seamless integration of Kubernetes with AWS Application Load Balancers, providing a managed, scalable solution for traffic management
+
+#### Namespace Separation in Kubernetes
+<img alt="Namespace Separation" width="1000" src="https://github.com/user-attachments/assets/9846ae8f-f97e-4646-a15f-6020962c28b7" />
+
+##### Defined Namespaces
+- **argocd**: For deployment and GitOps tools like ArgoCD.
+- **ecommerce**: Namespace for ecommerce-related applications.
+- **monitoring**: Namespace dedicated to monitoring tools and services.
+
+##### Reasons for Separation
+##### 1. Operational Advantages
+- Simplifies resource management within the cluster.
+
+##### 2. Resource Isolation
+- Each namespace has its own resources, ensuring no conflicts or resource overuse between applications or teams.
+
+##### 3. Access Control
+- Access permissions can be defined per namespace, restricting access to authorized users or teams only.
 
 
 ### CI/CD
