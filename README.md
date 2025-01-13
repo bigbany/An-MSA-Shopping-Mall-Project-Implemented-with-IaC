@@ -267,6 +267,13 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
 
 
 ### Monitoring
+<img alt="monitoring" width="1000" src="https://github.com/user-attachments/assets/6c630e11-0dc4-40ba-98ee-208986d3873e" />
+
+- **Infrastructure Monitoring**: Prometheus and Grafana with Blackbox Exporter, Node Exporter, and Alertmanager for system-level metrics and alerting.
+- **Application Monitoring**: Datadog with RUM (Real User Monitoring) for application performance and behavior insights.
+- **Notification**: Slack and Gmail for real-time alerts and logs to ensure prompt communication.
+
+
 
 ---
 
