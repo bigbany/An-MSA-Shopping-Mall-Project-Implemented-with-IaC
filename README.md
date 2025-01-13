@@ -121,7 +121,7 @@ In conclusion, Terragrunt simplifies the management and scalability of complex i
 - **High Availability**: Provides a managed EKS control plane with built-in HA.
 
 #### AWS LoadBalancer Controller
-<img alt="comparison_eks_k8s" width="1000" src="https://github.com/user-attachments/assets/72b5903e-a5cf-412e-8a80-5502af556fc6" />
+<img alt="comparison_eks_k8s" width="1000" src="https://github.com/user-attachments/assets/5128a0d0-a9d4-4636-a840-67f5b90aa054" />
 
 ##### 1. Ingress Resource Handling
 - Detects when an **Ingress resource** is defined in the Kubernetes cluster.
