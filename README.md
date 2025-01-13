@@ -107,7 +107,8 @@ In conclusion, Terragrunt simplifies the management and scalability of complex i
 
 ### EKS
 #### Comparison of EKS and K8s
-<img alt="comparison_eks_k8s" width="1000" src="https://github.com/user-attachments/assets/aa83ec9e-5db5-4a32-8f35-4a7d02a8e545"/ >
+
+<img alt="comparison_eks_k8s" width="1000" src="https://private-user-images.githubusercontent.com/63151655/402411284-aa83ec9e-5db5-4a32-8f35-4a7d02a8e545.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzY3Mzc1NjcsIm5iZiI6MTczNjczNzI2NywicGF0aCI6Ii82MzE1MTY1NS80MDI0MTEyODQtYWE4M2VjOWUtNWRiNS00YTMyLThmMzUtNGE3ZDAyYThlNTQ1LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTEzVDAzMDEwN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQ3ZWI2ZThhMDFjNjM5ZDNmOTJhYmI4NmE5NzU4MzA1NGQ0YTMwMzg1NjAwNzc1OTYxZmY3ODFmN2FmNzQyYjkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.W39D7_zB4HDrTVL3K6IHKx0cuurPqhHZDdob8dFeg9o"/ >
 
 
 ### CI/CD
