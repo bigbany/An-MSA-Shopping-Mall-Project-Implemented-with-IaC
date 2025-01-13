@@ -277,8 +277,6 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
 
 ---
 
-
-
 ## 6. Setup & Deployment
 
 ## 7. Testing & Results
