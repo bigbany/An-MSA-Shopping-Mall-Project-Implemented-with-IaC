@@ -105,6 +105,8 @@ By leveraging Terragrunt, we achieved a scalable and maintainable infrastructure
 
 In conclusion, Terragrunt simplifies the management and scalability of complex infrastructure.
 
+---
+
 ### EKS
 #### Comparison of EKS and K8s
 
@@ -165,10 +167,40 @@ This workflow ensures seamless integration of Kubernetes with AWS Application Lo
 ##### 3. Access Control
 - Access permissions can be defined per namespace, restricting access to authorized users or teams only.
 
+---
 
 ### CI/CD
+#### Jenkins vs GitHub Actions
+<img alt="JENKINS_GITHUBACTION" width="1000" src="https://github.com/user-attachments/assets/f3e24d9a-1c12-4b14-8034-c4d0c5f968c5" />
+
+##### **Jenkins**
+- **Server**: Requires a separate server to be set up and maintained, which can lead to higher infrastructure costs and operational overhead.
+- **Initial Setup**: Known for its complexity. Configuring Jenkins pipelines and plugins can be time-consuming and challenging for beginners.
+- **References**: A vast amount of community and official documentation is available due to Jenkins' long-standing popularity, making it easier to find solutions to issues.
+
+##### **GitHub Actions**
+- **Server**: Operates in the cloud, eliminating the need for dedicated server management. This reduces infrastructure costs and simplifies operations.
+- **Initial Setup**: Offers ease of use with a straightforward interface and pre-built workflows, making it beginner-friendly.
+- **References**: While slightly limited compared to Jenkins, GitHub Actions has an increasing number of resources due to its growing popularity.
+- **Why GitHub Actions Was Chosen**:
+  - **Ease of Multi-Repository Workflows**: GitHub Actions provides a seamless way to update ECR image tags in a different repository after a build, which was a key requirement.
+  - **Tight Integration with GitHub**: Built directly into GitHub, it simplifies tasks that involve multiple repositories or actions across different projects.
+  - **Cloud-Native Flexibility**: No need to manage servers, allowing focus on pipeline logic rather than infrastructure.
+
+---
+
+##### Key Takeaway: Why GitHub Actions?
+GitHub Actions was chosen because it simplifies workflows, particularly for:
+- Managing tasks like updating ECR image tags in other repositories post-build.
+- Teams already using GitHub, benefiting from its native integration and reduced operational overhead.
+
+While Jenkins offers flexibility and maturity, **GitHub Actions stood out for its ease of use and efficiency in handling specific needs like cross-repository updates.**
+
+---
 
 ### Monitoring
+
+---
 
 <img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/ba726749-bc02-4745-8af9-034b3a47e9af"/>
 ## 6. Setup & Deployment
