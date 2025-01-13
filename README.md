@@ -330,7 +330,6 @@ These components work together to provide a comprehensive monitoring and alertin
   - Container applications for application-level data.
 
 
-
 ## 6. Setup & Deployment
 
 ## 7. Testing & Results
