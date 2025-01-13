@@ -233,7 +233,11 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
 
 ##### Workflow
 
-<img alt="separation of two repo" width="1000" src="https://github.com/user-attachments/assets/c8d1f7e3-03ef-4a76-a198-b4991dbeef47" />
+<p align="center">
+  <img alt="separation of two repo" width="500" src="https://github.com/user-attachments/assets/c8d1f7e3-03ef-4a76-a198-b4991dbeef47" />
+  <img alt="separation of two repo" width="500" src="https://github.com/user-attachments/assets/0c4959c6-253f-4e49-baa7-f7d8bf7a4468" />
+</p>
+
 
 1. **Source Code Changes**:  
    When changes occur in the source code repository, a GitHub Action is triggered.
@@ -246,15 +250,20 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
 3. **Image Tag Update**:  
    The GitHub Action updates the image tag in the Kustomize manifest files located in the deployment repository to reflect the latest image tag.
 
-<img alt="separation of two repo" width="1000" src="https://github.com/user-attachments/assets/0c4959c6-253f-4e49-baa7-f7d8bf7a4468" />
 
 4. **ArgoCD Deployment**:  
    ArgoCD detects changes in the deployment repository and automatically deploys the updated image to the EKS cluster.
    
-<img alt="slack_msg" width="800" src="https://github.com/user-attachments/assets/3e1ff6f4-0a05-4195-bf26-9bda638a80a0"/>
 
-6. **Slack Notification**:  
-   After the deployment is completed, ArgoCD shares the deployment results (e.g., success or failure) in a Slack channel, ensuring visibility for the team.
+5. **Slack Notification**:
+
+<p align="center">
+  <img alt="separation of two repo" width="500" src="https://github.com/user-attachments/assets/c8d1f7e3-03ef-4a76-a198-b4991dbeef47" />
+  <img alt="separation of two repo" width="500" src="https://github.com/user-attachments/assets/0c4959c6-253f-4e49-baa7-f7d8bf7a4468" />
+</p>
+
+
+- After the deployment is completed, ArgoCD shares the deployment results (e.g., success or failure) in a Slack channel, ensuring visibility for the team.
 
 
 ---
