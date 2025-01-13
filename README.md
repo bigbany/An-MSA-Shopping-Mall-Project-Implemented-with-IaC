@@ -86,6 +86,7 @@ To minimize repetitive tasks and enhance scalability, **Terragrunt** was utilize
 By leveraging Terragrunt, we achieved a scalable and maintainable infrastructure setup that minimizes repetitive work and improves operational efficiency.
 
 <img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/aeefe4a3-424e-4e2c-83d9-73338ebbe084" />
+
 #### Key Points
 
 ##### Folder Structure:
@@ -105,6 +106,8 @@ By leveraging Terragrunt, we achieved a scalable and maintainable infrastructure
 In conclusion, Terragrunt simplifies the management and scalability of complex infrastructure.
 
 ### EKS
+#### Comparison of EKS and K8s
+<img alt="comparison_eks_k8s" width="1000" src="https://github.com/user-attachments/assets/aa83ec9e-5db5-4a32-8f35-4a7d02a8e545"/ >
 
 
 ### CI/CD
