@@ -329,6 +329,20 @@ These components work together to provide a comprehensive monitoring and alertin
   - Kubelet for node-level metrics.
   - Container applications for application-level data.
 
+#### Application Monitoring with DataDog
+- DataDog provides comprehensive application monitoring features, enabling real-time insights into application performance and behavior.
+
+**Datadog Live Search**
+<img alt="datadog_livesearch" width="1000" src="https://github.com/user-attachments/assets/bb1fe3ef-afef-4887-a5bd-985d8b331015" />
+
+- **Datadog Live Search** allows users to perform integrated searches across all data collected by Datadog, including **logs**, **metrics**, **events**, and **traces**. This feature provides a unified view to analyze and troubleshoot application behavior effectively.
+
+**Example Scenario**
+  
+- When the **advertisement service** was intentionally stopped, **GET /ads** requests responded with a **500 Internal Server Error**. This behavior was analyzed using Datadog's Live Search.
+
+**Datadog Live Search**
+
 
 ## 6. Setup & Deployment
 
