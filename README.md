@@ -341,7 +341,37 @@ These components work together to provide a comprehensive monitoring and alertin
   
 - When the **advertisement service** was intentionally stopped, **GET /ads** requests responded with a **500 Internal Server Error**. This behavior was analyzed using Datadog's Live Search.
 
-**Datadog Live Search**
+**RUM (Real User Monitoring)**
+<img alt="rum" width="1000" src="https://github.com/user-attachments/assets/03796b54-f211-48c1-9707-f0d48cecc974" />
+Real User Monitoring (RUM) provides insights into user interactions and application performance. The key metrics tracked are:
+
+**Core Web Vitals**
+- **Largest Contentful Paint (LCP)**  
+  Measures the time it takes for the largest visible content on the page to render. Indicates page loading performance.
+
+- **First Input Delay (FID)**  
+  Captures the delay experienced by users from their first interaction until the browser processes the event. Reflects responsiveness.
+
+- **Cumulative Layout Shift (CLS)**  
+  Measures visual stability by tracking unexpected layout shifts on the page.
+
+**User Analytics**
+- **Total Sessions**  
+  Tracks the total number of user sessions on the application.
+
+- **Most Visited Pages**  
+  Lists the pages that receive the highest number of visits, helping to identify popular content or areas of interest.
+
+**Session Explorer**
+<img alt="Session Explorer" width="1000" src="https://github.com/user-attachments/assets/9979353d-5bcc-4d2b-9937-7e3991f17ea0" />
+
+The **Session Explorer** in Datadog provides powerful tools for tracking user interactions and analyzing application performance. Key functionalities include:
+
+- **User Event History**:  
+  Tracks detailed user activities such as page views, clicks, and specific interactions within the application. This allows developers to understand user behavior and troubleshoot issues effectively.
+
+- **Session Replay**:  
+  Recreates user sessions visually, showing how users interacted with the application. This feature helps identify usability issues and diagnose errors by replaying the exact sequence of events during a session.
 
 
 ## 6. Setup & Deployment
