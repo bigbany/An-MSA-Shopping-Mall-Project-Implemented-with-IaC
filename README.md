@@ -375,6 +375,24 @@ The **Session Explorer** in Datadog provides powerful tools for tracking user in
 
 
 ## 6. Setup & Deployment
+### 6.1 Prometheus & Grafana Installation
+```bash
+# Install Metrics Server
+VER=$(curl -s https://api.github.com/repos/kubernetes-sigs/metrics-server/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/v//')
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v$VER/components.yaml
+# Enable kubectl top API Access
+kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
+# Add Raw Metrics Access for All Nodes
+kubectl get --raw "/apis/metrics.k8s.io/v1beta1/nodes" | jq
+# Verify Metrics Server
+kubectl top nodes
+```
+- The Metrics Server is required to enable `kubectl top` commands for viewing resource usage.
+
+### 6.2 ArgoCD Installation & Secret Creation
+
+
+### 6.3 Prometheus & Grafana Installation
 
 ## 7. Testing & Results
 
