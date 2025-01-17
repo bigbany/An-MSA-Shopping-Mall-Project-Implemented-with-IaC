@@ -458,7 +458,7 @@ Install Blackbox Exporter
 helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -n monitoring
 ```
 
-### 6.2 ArgoCD Installation
+### 6.2 ArgoCD Installation & Configuring Blue/Green Deployment
 Installing ArgoCD on EKS Cluster
 ```bash
 kubectl create namespace argocd
@@ -497,6 +497,160 @@ echo $ARGO_PWD
 <img alt="argocd" width="1000" src="https://github.com/user-attachments/assets/b103681d-3940-407f-be91-e2d0fbe2c8c9" />
 When accessed through the Load Balancer, the ArgoCD login screen is displayed.
 
+Installing Argo Rollouts
+```bash
+kubectl create secret generic mir-secret -n ecommerce \
+  --from-literal=DD_CLIENT_TOKEN=pub5e9e2367f827cc51705aa6c3c4017 \
+  --from-literal=DD_APPLICATION_ID=96243f16-749d-49a1-b29d-b9b0d3fc1caa \
+  --from-literal=DD_SITE=us5.datadoghq.com \
+  --from-literal=DD_SERVICE=mirapp \
+  --from-literal=RAILS_DATABASE=spree_shop \
+  --from-literal=RAILS_USERNAME=admin \
+  --from-literal=RAILS_PASSWORD=qwerqwer12! \
+  --from-literal=RAILS_HOST=mir-db.cd8yaap4uocm.ap-northeast-2.rds.amazonaws.com
+```
+
+Create Namespace for Argo Rollouts
+
+```bash
+kubectl create namespace argo-rollouts
+```
+
+Install Argo Rollouts
+```bash
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+```
+
+
+Installing Plugin for kubectl
+```bash
+curl -LO https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64
+# Change File Permissions
+chmod +x ./kubectl-argo-rollouts-linux-amd64
+# Move the Binary to /usr/local/bin
+sudo mv ./kubectl-argo-rollouts-linux-amd64 /usr/local/bin/kubectl-argo-rollouts
+# Verify Installation
+kubectl argo rollouts version
+
+kubectl-argo-rollouts: v1.0.2+7a23fe5
+  BuildDate: 2021-06-15T19:36:00Z
+  GitCommit: 7a23fe5dbf78181248c48af8e5224246434e7f99
+  GitTreeState: clean
+  GoVersion: go1.16.3
+  Compiler: gc
+  Platform: linux/amd64
+
+```
+
+Configure Blue and Green Services
+```bash
+cd ecommerce-workshop-k8s-manifest-Jo/base/frontend.yaml
+```
+Manual Rollout Approval:
+Set the autoPromotionEnabled field to false to require manual approval before completing the rollout:
+
+```bash
+autoPromotionEnabled: false
+```
+
+Automatic Rollout Deployment:
+Set the autoPromotionEnabled field to true to enable automatic deployment without manual approval:
+
+```bash
+autoPromotionEnabled: true
+```
+
+
+Rollout Resource Configuration
+
+- **apiVersion**: Use `argoproj.io/v1alpha1` instead of `apps/v1`.  
+- **kind**: Use `Rollout` instead of `Deployment`.
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  labels:
+    tags.datadoghq.com/service: storefront
+    app: ecommerce
+    tags.datadoghq.com/env: "development"
+  name: frontend
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      tags.datadoghq.com/service: storefront
+      tags.datadoghq.com/env: "development"
+      app: ecommerce
+  strategy:
+    blueGreen: 
+      # `activeService` is the previously deployed Blue service.
+      activeService: frontend-rollout-bluegreen-active
+
+      # `previewService` is the newly deployed Green service.
+      previewService: frontend-rollout-bluegreen-preview
+
+      # The `autoPromotionEnabled` option determines whether the rollout proceeds automatically.
+      # Set to `false` for manual approval or `true` for automatic rollout.
+      autoPromotionEnabled: true
+
+  template:
+    metadata:
+      labels:
+        tags.datadoghq.com/service: storefront
+        tags.datadoghq.com/env: "development"
+        app: ecommerce
+    spec:
+      containers:
+      - args:
+        - docker-entrypoint.sh
+        command:
+        - sh
+        env:
+        - name: DB_USERNAME
+          value: user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: pw
+              name: db-password
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: DD_LOGS_INJECTION
+          value: "true"
+        - name: DD_ENV
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/env']
+        - name: DD_SERVICE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/service']
+        - name: DD_ANALYTICS_ENABLED
+          value: "true"
+        - name: DISCOUNTS_ROUTE
+          value: "http://discounts"
+        - name: DISCOUNTS_PORT
+          value: "5001"
+        - name: ADS_ROUTE
+          value: "http://advertisements"
+        - name: ADS_PORT
+          value: "5002"
+        image: 822837196792.dkr.ecr.ap-northeast-2.amazonaws.com/frontend-ecr:826a72c4
+        imagePullPolicy: Always
+        name: ecommerce-spree-observability
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits: {}
+
 
 ### 6.3 Datadog agent Installation
 
@@ -520,14 +674,28 @@ The Datadog Agent has been installed.
 
 
 ## 7. Testing & Results
+Blue-Green Deployment Testing
+
 
 ```bash
-
+kubectl argo rollouts dashboard -n blue-green
 ```
+
+<img alt="rollout_dashboard" width="800" src="https://github.com/user-attachments/assets/141d700b-567a-4597-afdc-0b6898bcad39" />
 
 ```bash
-
+kubectl argo rollouts get rollout frontend
 ```
+
+<img alt="rollout" width="800" src="https://github.com/user-attachments/assets/8bfa1182-340a-4236-8d5d-33f9fadb97ed" />
+
+<img alt="rollout_ui" width="1000" src="https://github.com/user-attachments/assets/e3b43874-8518-4363-930e-191a1a2c43d6" />
+
+- ArgoCD UI Screen for Blue/Green Deployment
+
+<img alt="blue_green" width="1000" src="https://github.com/user-attachments/assets/e1a3ef9d-4f70-40d0-bbb2-764b5612a25e" />
+
+
 
 ```bash
 
