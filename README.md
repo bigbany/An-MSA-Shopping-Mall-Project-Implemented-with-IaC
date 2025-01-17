@@ -376,18 +376,87 @@ The **Session Explorer** in Datadog provides powerful tools for tracking user in
 
 ## 6. Setup & Deployment
 ### 6.1 Prometheus & Grafana Installation
+
+Install Metrics Server
 ```bash
-# Install Metrics Server
 VER=$(curl -s https://api.github.com/repos/kubernetes-sigs/metrics-server/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/v//')
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v$VER/components.yaml
-# Enable kubectl top API Access
+```
+
+Enable kubectl top API Access
+```bash
 kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
-# Add Raw Metrics Access for All Nodes
+```
+
+Add Raw Metrics Access for All Nodes
+```bash
 kubectl get --raw "/apis/metrics.k8s.io/v1beta1/nodes" | jq
-# Verify Metrics Server
+```
+
+Verify Metrics Server
+
+```bash
 kubectl top nodes
 ```
-- The Metrics Server is required to enable `kubectl top` commands for viewing resource usage.
+
+Deploy EFS Persistent Volume
+
+```bash
+cd ~/kube-prometheus-stack/
+kubectl apply -f efspv.yaml
+```
+
+Deploy Prometheus Helm Package
+
+```bash
+kubectl create ns monitoring
+helm install prometheus . -n monitoring -f values.yaml
+```
+
+Set Up AWS Load Balancer Controller
+```bash
+# Install OIDC Provider
+AWS_REGION='ap-northeast-2'
+eksctl utils associate-iam-oidc-provider \
+--region ${AWS_REGION} \
+--cluster MIR-DEV-eks \
+--approve
+
+# Create IAM Service Account
+ACCOUNT_ID='102120298168'
+eksctl create iamserviceaccount \
+--cluster MIR-DEV-eks \
+--namespace kube-system \
+--name aws-load-balancer-controller \
+--attach-policy-arn arn:aws:iam::$ACCOUNT_ID:policy/AWSLoadBalancerControllerIAMPolicy \
+--override-existing-serviceaccounts \
+--approve
+
+# Install Cert-Manager
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
+
+# Deploy Load Balancer Controller
+curl -Lo v2_5_4_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml
+sed -i.bak -e '596,604d' ./v2_5_4_full.yaml
+sed -i.bak -e 's|MIR-DEV-eks|eks-demo|' ./v2_5_4_full.yaml
+kubectl apply -f v2_5_4_full.yaml
+
+# Install IngressClass
+curl -Lo v2_5_4_ingclass.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_ingclass
+kubectl apply -f v2_5_4_ingclass.yaml
+```
+
+Deploy Ingress Resources
+```bash
+kubectl apply -f ingress.yaml
+kubectl apply -f ALM.yaml
+kubectl apply -f PRO.yaml
+```
+
+Install Blackbox Exporter
+```bash
+helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -n monitoring
+```
 
 ### 6.2 ArgoCD Installation & Secret Creation
 
