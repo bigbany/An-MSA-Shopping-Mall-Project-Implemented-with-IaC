@@ -250,8 +250,6 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
 
 ---
 
-<img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/ba726749-bc02-4745-8af9-034b3a47e9af"/>
-
 
 ### 5.5 Monitoring
 <img alt="monitoring" width="1000" src="https://github.com/user-attachments/assets/6c630e11-0dc4-40ba-98ee-208986d3873e" />
