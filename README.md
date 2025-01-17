@@ -458,12 +458,80 @@ Install Blackbox Exporter
 helm install blackbox-exporter prometheus-community/prometheus-blackbox-exporter -n monitoring
 ```
 
-### 6.2 ArgoCD Installation & Secret Creation
+### 6.2 ArgoCD Installation
+Installing ArgoCD on EKS Cluster
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+Optional: Install ArgoCD CLI
+```bash
+cd ~/environment
+VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+
+sudo curl --silent --location -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64
+
+sudo chmod +x /usr/local/bin/argocd
+```
+
+Making the ArgoCD Server Accessible
+
+```bash
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+
+Retrieving the ELB Address
+```bash
+export ARGOCD_SERVER=`kubectl get svc argocd-server -n argocd -o json | jq --raw-output .status.loadBalancer.ingress[0].hostname`
+echo $ARGOCD_SERVER
+```
+
+Retrieving the ArgoCD Admin Password
+- The default Username for ArgoCD is admin. To get the initial Password, execute the following:
+```bash
+ARGO_PWD=`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+echo $ARGO_PWD
+```
+
+<img alt="argocd" width="1000" src="https://github.com/user-attachments/assets/b103681d-3940-407f-be91-e2d0fbe2c8c9" />
+When accessed through the Load Balancer, the ArgoCD login screen is displayed.
 
 
-### 6.3 Prometheus & Grafana Installation
+### 6.3 Datadog agent Installation
+
+Add the Datadog Helm Repository
+```bash
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+```
+
+Use Helm to install the Datadog monitoring chart with the specified configuration
+```bash
+cd /home/ubuntu/datadog
+helm install datadog-monitoring -f values.yaml -n monitoring \
+--set datadog.site={{ .Values.datadogSite }}' \
+--set datadog.apiKey='{{ .Values.datadogApiKey }}'
+```
+
+<img alt="datadog_installed" width="1000" src="https://github.com/user-attachments/assets/f1dde7a5-e104-40e4-b3ec-44f8cd874a43" />
+
+The Datadog Agent has been installed.
+
 
 ## 7. Testing & Results
+
+```bash
+
+```
+
+```bash
+
+```
+
+```bash
+
+```
 
 ## 8. Challenges & Improvements
 
