@@ -2,22 +2,13 @@
 ## 1. Introduction
 This project focuses on building an EKS cluster using Infrastructure as Code (IaC) and implementing a shopping mall application based on a microservices architecture (MSA).
 
+
 ### Key Features
-
 - **Infrastructure as Code (IaC)**  
-  Utilized **Terragrunt** to ensure reusability and maintainability of infrastructure configurations.
-
 - **Kubernetes**  
-  Leveraged **Amazon EKS** (Elastic Kubernetes Service) for scalability and efficient container orchestration.
-
 - **CI/CD Pipeline**  
-  Integrated **GitHub Actions** and **Argo CD** to implement a robust continuous integration and deployment process.
-
 - **Infrastructure Monitoring**  
-  Deployed **Prometheus** and **Grafana** to monitor and visualize the health of the infrastructure.
-
 - **Application Monitoring**  
-  Implemented **Datadog** for detailed monitoring and performance insights of the application.
 
 ---
 
@@ -40,7 +31,6 @@ When a user accesses the domain registered in Route53, the request is routed thr
 ---
 
 ## 3. Tech Stack
-### Tech Stack
 
 | Category                 | Technology            | Logo                                                                                  | Description                                                      |
 |--------------------------|-----------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------|
@@ -59,7 +49,7 @@ When a user accesses the domain registered in Route53, the request is routed thr
 
 
 ## 4. Project Structure
-### This repository consists of three folders:
+### Repository Components
 
 - 2MIR-FP-main: Contains Terragrunt code.
 - ecommerce-workshop-k8s-manifest-main: Holds the source code for the shopping mall application.
@@ -68,7 +58,7 @@ When a user accesses the domain registered in Route53, the request is routed thr
 ---
 
 ## 5. Implementation Details
-### IaC
+### 5.1 Infrastructure as Code (IaC)
 
 Infrastructure as Code (IaC) is a methodology for managing and provisioning infrastructure through code. This approach allows infrastructure to be implemented quickly and accurately, reducing manual effort and errors.
 
@@ -88,8 +78,6 @@ By leveraging Terragrunt, we achieved a scalable and maintainable infrastructure
 
 <img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/aeefe4a3-424e-4e2c-83d9-73338ebbe084" />
 
-#### Key Points
-
 ##### Folder Structure:
 - **Origin Folder**: Contains common Terraform code (`.tf`) definitions.
 - **DEV, PROD**: Each environment is managed with its own `terragrunt.hcl` file.
@@ -108,7 +96,7 @@ In conclusion, Terragrunt simplifies the management and scalability of complex i
 
 ---
 
-### EKS
+### 5.2 Kubernetes (EKS)
 #### Comparison of EKS and K8s
 
 <img alt="comparison_eks_k8s" width="1000" src="https://private-user-images.githubusercontent.com/63151655/402411284-aa83ec9e-5db5-4a32-8f35-4a7d02a8e545.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzY3Mzc1NjcsIm5iZiI6MTczNjczNzI2NywicGF0aCI6Ii82MzE1MTY1NS80MDI0MTEyODQtYWE4M2VjOWUtNWRiNS00YTMyLThmMzUtNGE3ZDAyYThlNTQ1LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTEzVDAzMDEwN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQ3ZWI2ZThhMDFjNjM5ZDNmOTJhYmI4NmE5NzU4MzA1NGQ0YTMwMzg1NjAwNzc1OTYxZmY3ODFmN2FmNzQyYjkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.W39D7_zB4HDrTVL3K6IHKx0cuurPqhHZDdob8dFeg9o" />
@@ -126,19 +114,19 @@ In conclusion, Terragrunt simplifies the management and scalability of complex i
 #### AWS LoadBalancer Controller
 <img alt="comparison_eks_k8s" width="1000" src="https://github.com/user-attachments/assets/5128a0d0-a9d4-4636-a840-67f5b90aa054" />
 
-##### 1. Ingress Resource Handling
+1. Ingress Resource Handling
 - Detects when an **Ingress resource** is defined in the Kubernetes cluster.
 - Creates traffic routing configurations based on the Ingress rules.
 
-##### 2. ALB Creation and Management
+2. ALB Creation and Management
 - Automatically creates an **Application Load Balancer (ALB)** based on the Ingress resource definition.
 - Routes client (user) traffic through the ALB to the appropriate Kubernetes services and Pods.
 
-##### 3. Traffic Routing
+3. Traffic Routing
 - The ALB forwards traffic to the correct services according to the Ingress rules.
 - Kubernetes services then route the traffic to the corresponding Pods.
 
-##### 4. Automation
+4. Automation
 - Automates tasks such as ALB creation, applying Ingress rules, and configuring security groups.
 - Reduces the need for manual intervention, simplifying management.
 
@@ -150,7 +138,7 @@ In conclusion, Terragrunt simplifies the management and scalability of complex i
 
 This workflow ensures seamless integration of Kubernetes with AWS Application Load Balancers, providing a managed, scalable solution for traffic management
 
-#### Namespace Separation in Kubernetes
+### 5.3 Namespace Separation
 <img alt="Namespace Separation" width="1000" src="https://github.com/user-attachments/assets/9846ae8f-f97e-4646-a15f-6020962c28b7" />
 
 ##### Defined Namespaces
@@ -159,18 +147,18 @@ This workflow ensures seamless integration of Kubernetes with AWS Application Lo
 - **monitoring**: Namespace dedicated to monitoring tools and services.
 
 ##### Reasons for Separation
-##### 1. Operational Advantages
+1. Operational Advantages
 - Simplifies resource management within the cluster.
 
-##### 2. Resource Isolation
+2. Resource Isolation
 - Each namespace has its own resources, ensuring no conflicts or resource overuse between applications or teams.
 
-##### 3. Access Control
+3. Access Control
 - Access permissions can be defined per namespace, restricting access to authorized users or teams only.
 
 ---
 
-### CI/CD
+### 5.4 CI/CD
 #### Jenkins vs GitHub Actions
 <img alt="JENKINS_GITHUBACTION" width="1000" src="https://github.com/user-attachments/assets/f3e24d9a-1c12-4b14-8034-c4d0c5f968c5" />
 
@@ -238,24 +226,24 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
   <img alt="separation of two repo" width="500" src="https://github.com/user-attachments/assets/0c4959c6-253f-4e49-baa7-f7d8bf7a4468" />
 </p>
 
-1. **Source Code Changes**:  
+1. **Source Code Changes**  
    When changes occur in the source code repository, a GitHub Action is triggered.
 
-2. **Image Build and Push**:  
+2. **Image Build and Push** 
    The GitHub Action:
    - Builds a new Docker image using the updated source code.
    - Pushes the new image to Amazon ECR.
 
-3. **Image Tag Update**:  
+3. **Image Tag Update**
    The GitHub Action updates the image tag in the Kustomize manifest files located in the deployment repository to reflect the latest image tag.
 
 
-4. **ArgoCD Deployment**:  
+4. **ArgoCD Deployment** 
    ArgoCD detects changes in the deployment repository and automatically deploys the updated image to the EKS cluster.
    
 
-5. **Slack Notification**:
-<img alt="slack_msg" width="800" src="https://private-user-images.githubusercontent.com/63151655/402471554-3e1ff6f4-0a05-4195-bf26-9bda638a80a0.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzY3NTcyNTIsIm5iZiI6MTczNjc1Njk1MiwicGF0aCI6Ii82MzE1MTY1NS80MDI0NzE1NTQtM2UxZmY2ZjQtMGEwNS00MTk1LWJmMjYtOWJkYTYzOGE4MGEwLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTEzVDA4MjkxMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWJjY2VlNTY4YjQ3YzE2ZTM4Mjc0ZmY4NTJkZjMzNGNkNTUwMjg1ZWViN2FjMWNiM2Y5MDQzNDg3ZTQxOGZlNjQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.5ExFCuRhMVQH__-eiGS7OImiDMOhSHox-vfzX59hkbM"/>
+5. **Slack Notification**
+<img alt="slack_msg" width="800" src="https://github.com/user-attachments/assets/d032c797-3651-40ee-a164-d48e9336ac9e"/>
 
 - After the deployment is completed, ArgoCD shares the deployment results (e.g., success or failure) in a Slack channel, ensuring visibility for the team.
 
@@ -265,7 +253,7 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
 <img alt="terragrunt" width="1000" src="https://github.com/user-attachments/assets/ba726749-bc02-4745-8af9-034b3a47e9af"/>
 
 
-### Monitoring
+### 5.5 Monitoring
 <img alt="monitoring" width="1000" src="https://github.com/user-attachments/assets/6c630e11-0dc4-40ba-98ee-208986d3873e" />
 
 - **Infrastructure Monitoring**: Prometheus and Grafana with Blackbox Exporter, Node Exporter, and Alertmanager for system-level metrics and alerting.
@@ -282,6 +270,11 @@ Blue-green deployment is particularly beneficial for systems where uninterrupted
 ##### **How Pull Works**
 - Prometheus server actively queries the monitoring targets where the client/exporter is installed.
 - Metrics are retrieved by the server at regular intervals, ensuring centralized control over data collection.
+
+<p align="center">
+  <img alt="blackbox_exporter" width="500" src="https://github.com/user-attachments/assets/b5f157ec-8d9b-448c-b2b9-d920def6a052" />
+  <img alt="Node Exporter" width="500" src="https://github.com/user-attachments/assets/58943b08-1582-4e3e-9aa0-6fda76becdc7" />
+</p>
 
 1. **Blackbox Exporter**
 - **Role**: Performs active probing to monitor the availability and performance of endpoints.
@@ -650,7 +643,7 @@ spec:
             cpu: 100m
             memory: 100Mi
           limits: {}
-
+```
 
 ### 6.3 Datadog agent Installation
 
@@ -696,11 +689,21 @@ kubectl argo rollouts get rollout frontend
 <img alt="blue_green" width="1000" src="https://github.com/user-attachments/assets/e1a3ef9d-4f70-40d0-bbb2-764b5612a25e" />
 
 
+The advertisement has been changed from Black Friday to Christmas.
 
-```bash
+Notifiaction Testiing
 
-```
+<img alt="rollout_dashboard" width="800" src="https://github.com/user-attachments/assets/3b2c176b-01f3-4169-8d57-2a4c677e25ee" />
+- The **advertisements** pod is intentionally terminated to simulate an error.
+- The error logs are identified in **Datadog Live Tail**, triggering an alert.
 
-## 8. Challenges & Improvements
 
-## 9. References
+<img alt="rollout_dashboard" width="800" src="https://github.com/user-attachments/assets/8d45c3a3-bb01-42a7-aef9-4dd36fe154eb" />
+- A **Slack message** is sent to notify the team about the **advertisements service error**.
+- If the error is related to the pod (infrastructure), **AlertManager** sends an email notification via **Gmail**.
+
+
+## 8. References
+ [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)
+ [datadog-agent](https://docs.datadoghq.com/agent/?tab=Linux)
+
