@@ -416,7 +416,7 @@ eksctl utils associate-iam-oidc-provider \
 --approve
 
 # Create IAM Service Account
-ACCOUNT_ID='102120298168'
+ACCOUNT_ID=$ACCOUNT_ID
 eksctl create iamserviceaccount \
 --cluster MIR-DEV-eks \
 --namespace kube-system \
@@ -493,13 +493,13 @@ When accessed through the Load Balancer, the ArgoCD login screen is displayed.
 Installing Argo Rollouts
 ```bash
 kubectl create secret generic mir-secret -n ecommerce \
-  --from-literal=DD_CLIENT_TOKEN=pub5e9e2367f827cc51705aa6c3c4017 \
-  --from-literal=DD_APPLICATION_ID=96243f16-749d-49a1-b29d-b9b0d3fc1caa \
+  --from-literal=DD_CLIENT_TOKEN=$CLIENT_TOKEN \
+  --from-literal=DD_APPLICATION_ID=$APPLICATION_ID \
   --from-literal=DD_SITE=us5.datadoghq.com \
   --from-literal=DD_SERVICE=mirapp \
   --from-literal=RAILS_DATABASE=spree_shop \
-  --from-literal=RAILS_USERNAME=admin \
-  --from-literal=RAILS_PASSWORD=qwerqwer12! \
+  --from-literal=RAILS_USERNAME=$USER \
+  --from-literal=RAILS_PASSWORD=$PASSWORD \
   --from-literal=RAILS_HOST=mir-db.cd8yaap4uocm.ap-northeast-2.rds.amazonaws.com
 ```
 
@@ -667,7 +667,7 @@ The Datadog Agent has been installed.
 
 
 ## 7. Testing & Results
-Blue-Green Deployment Testing
+### 7.1 Blue-Green Deployment Testing
 
 
 ```bash
@@ -691,7 +691,7 @@ kubectl argo rollouts get rollout frontend
 
 The advertisement has been changed from Black Friday to Christmas.
 
-Notifiaction Testiing
+### 7.2 Notifiaction Testiing
 
 <img alt="rollout_dashboard" width="800" src="https://github.com/user-attachments/assets/3b2c176b-01f3-4169-8d57-2a4c677e25ee" />
 - The **advertisements** pod is intentionally terminated to simulate an error.
