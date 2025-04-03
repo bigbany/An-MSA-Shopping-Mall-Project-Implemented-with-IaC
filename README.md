@@ -99,7 +99,7 @@ In conclusion, Terragrunt simplifies the management and scalability of complex i
 ### 5.2 Kubernetes (EKS)
 #### Comparison of EKS and K8s
 
-<img alt="comparison_eks_k8s" width="1000" src="https://private-user-images.githubusercontent.com/63151655/402417127-72b5903e-a5cf-412e-8a80-5502af556fc6.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzcxMDI0NjMsIm5iZiI6MTczNzEwMjE2MywicGF0aCI6Ii82MzE1MTY1NS80MDI0MTcxMjctNzJiNTkwM2UtYTVjZi00MTJlLThhODAtNTUwMmFmNTU2ZmM2LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMTclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTE3VDA4MjI0M1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTRkMTJkNWZiYTc0ZGM1NTZkMDgxOTU2ZWQyYjA2MjA3NjQ4MDk0MWVmYWVhYzUzNDAyNDdiNzI5YTMyZTg1NjUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.ovCY3X8CwSmjuUFU4vUdlmGZrHsLleOgyaSlfVFsQCI" />
+<img alt="comparison_eks_k8s" width="1000" src="https://github.com/user-attachments/assets/91390a8f-c02c-4cec-bb40-b85cd9181a9b" />
 
 ##### K8s (Kubernetes)
 - **Management**: Requires direct management.
